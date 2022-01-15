@@ -13,8 +13,8 @@ export const getCompanies = async (req: Request, res: Response) => {
 
 export const createCompany = async (req: Request, res: Response) => {
 	try {
-		const { name, phone, nature }: ICompanyDoc = req.body;
-		const company: ICompanyDoc | null = await Company.create({ name, phone, nature });
+		const { name, phone }: ICompanyDoc = req.body;
+		const company: ICompanyDoc | null = await Company.create({ name, phone });
 
 		return res.status(201).json({ message: "Company created!", data: company });
 	} catch (error) {
@@ -36,9 +36,9 @@ export const readCompany = async (req: Request, res: Response) => {
 export const updateCompany = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
-		const { name, phone, nature }: ICompanyDoc = req.body;
+		const { name, phone }: ICompanyDoc = req.body;
 
-		await Company.findByIdAndUpdate(id, { name, phone, nature });
+		await Company.findByIdAndUpdate(id, { name, phone });
 		const company: ICompanyDoc | null = await Company.findById(id);
 
 		return res.status(201).json({ message: "Company updated!", data: company });

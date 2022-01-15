@@ -1,4 +1,5 @@
-import { Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
+import { IStaffDoc } from "../utils/interfaces";
 
 const staffSchema = new Schema(
 	{
@@ -10,7 +11,7 @@ const staffSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		phoneNumber: {
+		phone: {
 			type: String,
 			required: true,
 		},
@@ -18,6 +19,18 @@ const staffSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "Role",
 		},
+		company: {
+			type: Schema.Types.ObjectId,
+			ref: "Company",
+		},
+		user: {
+			type: Schema.Types.ObjectId,
+			ref: "User",
+		},
 	},
 	{ timestamps: true }
 );
+
+const Staff = model<IStaffDoc, Model<IStaffDoc>>("Staff", staffSchema);
+
+export { Staff };

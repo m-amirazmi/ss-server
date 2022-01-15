@@ -11,10 +11,6 @@ const companySchema = new Schema(
 			type: String,
 			required: true,
 		},
-		nature: {
-			type: String,
-			required: true,
-		},
 	},
 	{ timestamps: true }
 );
