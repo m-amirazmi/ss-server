@@ -1,31 +1,22 @@
-import { model, Schema } from "mongoose";
-import { IUser, IUserDoc, IUserModel } from "../utils/interfaces";
+import { Model, model, Schema } from "mongoose";
+import { IUserDoc } from "../utils/interfaces";
 
-const userSchema = new Schema({
-	firstName: {
-		type: String,
-		default: null,
+const userSchema = new Schema(
+	{
+		email: {
+			type: String,
+			unique: true,
+		},
+		password: {
+			type: String,
+		},
+		token: {
+			type: String,
+		},
 	},
-	lastName: {
-		type: String,
-		default: null,
-	},
-	email: {
-		type: String,
-		unique: true,
-	},
-	password: {
-		type: String,
-	},
-	token: {
-		type: String,
-	},
-});
+	{ timestamps: true }
+);
 
-const User = model<IUserDoc, IUserModel>("User", userSchema);
-
-userSchema.statics.build = (attr: IUser) => {
-	return new User(attr);
-};
+const User = model<IUserDoc, Model<IUserDoc>>("User", userSchema);
 
 export { User };
